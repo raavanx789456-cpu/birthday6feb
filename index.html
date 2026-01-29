@@ -8,10 +8,12 @@
         body { margin: 0; background: #fff0f3; font-family: 'Georgia', serif; text-align: center; }
         #countdown-section { height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; }
         .timer { font-size: 3rem; color: #ff4d6d; font-weight: bold; margin: 20px 0; }
-        #birthday-content { display: none; padding: 20px; } /* Pehle chupa rahega */
+        #birthday-content { display: none; padding: 20px; }
         .header { padding: 40px; }
         h1 { color: #ff4d6d; font-size: 2.5rem; }
-        .gallery img { width: 250px; height: 300px; object-fit: cover; border: 8px solid white; border-radius: 10px; margin: 10px; transform: rotate(-3deg); }
+        /* Gallery Style */
+        .gallery { display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; }
+        .gallery img { width: 280px; height: 350px; object-fit: cover; border: 10px solid white; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
         .heart { position: fixed; color: #ff4d6d; animation: fly 5s linear infinite; bottom: -50px; z-index: -1; }
         @keyframes fly { 0% { transform: translateY(0); opacity: 1; } 100% { transform: translateY(-110vh); opacity: 0; } }
     </style>
@@ -29,16 +31,21 @@
             <h1>Happy Birthday, My Queen! ❤️</h1>
         </div>
         <div class="gallery">
-            <img src="photo1.jpg">
-            <img src="photo2.jpg">
-            <img src="photo3.jpg">
+            <img src="Photo1.jpg">
+            <img src="Photo2.jpg">
+            <img src="Photo3.jpg">
         </div>
-        <p style="font-size: 1.5rem;">I Love You Forever!</p>
-        <audio id="bgMusic" loop><source src="music.mp3" type="audio/mpeg"></audio>
-        <button onclick="document.getElementById('bgMusic').play()" style="padding:10px 20px; border-radius:20px; background:#ff4d6d; color:white; border:none; cursor:pointer;">🎵 Play Music</button>
+        <p style="font-size: 1.5rem; margin-top: 20px;">I Love You Forever!</p>
+        
+        <audio id="bgMusic" loop>
+            <source src="Music.mp3" type="audio/mpeg">
+        </audio>
+        <br>
+        <button onclick="document.getElementById('bgMusic').play()" style="padding:15px 30px; border-radius:50px; background:#ff4d6d; color:white; border:none; cursor:pointer; font-size: 1.2rem; box-shadow: 0 4px 10px rgba(0,0,0,0.2);">🎵 Play Music</button>
     </div>
 
     <script>
+        // Date set to 6th Feb 2026
         const targetDate = new Date("Feb 6, 2026 00:00:00").getTime();
 
         const x = setInterval(function() {
@@ -52,6 +59,7 @@
 
             document.getElementById("timer").innerHTML = days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
 
+            // Jab time khatam ho jaye ya testing ke liye (distance < 0)
             if (distance < 0) {
                 clearInterval(x);
                 document.getElementById("countdown-section").style.display = "none";
@@ -59,6 +67,7 @@
             }
         }, 1000);
 
+        // Floating Hearts
         function createHeart() {
             const heart = document.createElement('div');
             heart.classList.add('heart');
