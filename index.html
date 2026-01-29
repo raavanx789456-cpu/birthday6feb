@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Waiting for your Birthday...</title>
+    <style>
+        body { margin: 0; background: #fff0f3; font-family: 'Georgia', serif; text-align: center; }
+        #countdown-section { height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; }
+        .timer { font-size: 3rem; color: #ff4d6d; font-weight: bold; margin: 20px 0; }
+        #birthday-content { display: none; padding: 20px; } /* Pehle chupa rahega */
+        .header { padding: 40px; }
+        h1 { color: #ff4d6d; font-size: 2.5rem; }
+        .gallery img { width: 250px; height: 300px; object-fit: cover; border: 8px solid white; border-radius: 10px; margin: 10px; transform: rotate(-3deg); }
+        .heart { position: fixed; color: #ff4d6d; animation: fly 5s linear infinite; bottom: -50px; z-index: -1; }
+        @keyframes fly { 0% { transform: translateY(0); opacity: 1; } 100% { transform: translateY(-110vh); opacity: 0; } }
+    </style>
+</head>
+<body>
+
+    <div id="countdown-section">
+        <h1>Waiting for 6th Feb... ❤️</h1>
+        <div class="timer" id="timer">00:00:00:00</div>
+        <p>Thoda sa intezaar aur, kuch special aa raha hai!</p>
+    </div>
+
+    <div id="birthday-content">
+        <div class="header">
+            <h1>Happy Birthday, My Queen! ❤️</h1>
+        </div>
+        <div class="gallery">
+            <img src="photo1.jpg">
+            <img src="photo2.jpg">
+            <img src="photo3.jpg">
+        </div>
+        <p style="font-size: 1.5rem;">I Love You Forever!</p>
+        <audio id="bgMusic" loop><source src="music.mp3" type="audio/mpeg"></audio>
+        <button onclick="document.getElementById('bgMusic').play()" style="padding:10px 20px; border-radius:20px; background:#ff4d6d; color:white; border:none; cursor:pointer;">🎵 Play Music</button>
+    </div>
+
+    <script>
+        const targetDate = new Date("Feb 6, 2026 00:00:00").getTime();
+
+        const x = setInterval(function() {
+            const now = new Date().getTime();
+            const distance = targetDate - now;
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById("timer").innerHTML = days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
+
+            if (distance < 0) {
+                clearInterval(x);
+                document.getElementById("countdown-section").style.display = "none";
+                document.getElementById("birthday-content").style.display = "block";
+            }
+        }, 1000);
+
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            heart.innerHTML = '❤️';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = (Math.random() * 2 + 3) + 's';
+            document.body.appendChild(heart);
+            setTimeout(() => { heart.remove(); }, 5000);
+        }
+        setInterval(createHeart, 300);
+    </script>
+</body>
+</html>
