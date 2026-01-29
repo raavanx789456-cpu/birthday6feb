@@ -60,7 +60,7 @@
             document.getElementById("timer").innerHTML = days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
 
             // Jab time khatam ho jaye ya testing ke liye (distance > 0)
-            if (distance < 0) {
+            if (distance > -100) {
                 clearInterval(x);
                 document.getElementById("countdown-section").style.display = "none";
                 document.getElementById("birthday-content").style.display = "block";
@@ -81,6 +81,7 @@
     </script>
 </body>
 </html>
+
 
 
 
